@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tic-Tac-Toe</title>
+        <style>
+            header {
+                font-size: 25mm; 
+            }
+
+            body {
+                background-color: rgb(164, 167, 126);
+            }
+
+            .tic-tac-toe #gameboard {
+                width: 300px;
+                height: 300px;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0;
+            }
+
+            .tic-tac-toe button {
+                width: 100px;
+                height: 100px;
+                background: rgb(255, 217, 50);
+                border: 1px solid black;
+                margin: 0;
+                color:black;
+            }
+
+            .tic-tac-toe [aria-label="X"] {
+                background-image: url("cross.png");
+                background-color: rgb(255, 188, 64);
+            }
+
+            .tic-tac-toe [aria-label="O"] {
+                background-image: url("circle.png");
+                background-color: rgb(255, 188, 64);
+            }
+
+            /* NOT YET IMPLEMENTED:
+            
+            .tic-tac-toe .highlighted {
+                background-color: yellow;
+            }
+
+            .warning {
+                color: red;
+            }
+
+            .success {
+                color: green;
+                background-color: yellow;
+            }
+
+            */
+
+        </style>
+    </head>
+    <body>
+        <header>Interactive offline Tic-Tac-Toe game</header>
+        <div class=tic-tac-toe>
+            <div id="gameboard" onclick="MARKINGS(event);">
+                <button aria-label="">A1</button>
+                <button aria-label="">A2</button>
+                <button aria-label="">A3</button>
+                <button aria-label="">B1</button>
+                <button aria-label="">B2</button>
+                <button aria-label="">B3</button>
+                <button aria-label="">C1</button>
+                <button aria-label="">C2</button>
+                <button aria-label="">C3</button>
+            </div>
+        </div>
+        <h1>Instructions:</h1>
+        <p>Play with a friend and choose at random who starts the game. Once you've decided who starts, the first player marks one of the 9 fields in the grid with the cross symbol by clicking on it with the left mouse button or by tapping it if you play mobile. Then player 2 makes their move by clicking or tapping one of the other fields to make circle symbols. Now it's player 1's turn again and they can now again put their cross symbol unto whichever empty cell they want. Keep this turn order, alternating between cross and circle symbols (players 1 and 2) until one of you has won or there are no more fields left. You win by completing a row or column of 3 of your own symbols. Additionally, you can also win if you put your own symbol into three cells that form a diagonal of the grid. It's a tie if you used up all cells and none of you has won. gl hf</p>
+        <h2>HINTS:</h2>
+        <p class="HINT"> - any hints - </p>
+        <script>
+            var PLAYER = "X";
+            //declare variable HINT and set it to element object with class "HINT" using document.querySelector(...)
+            var HINT = document.querySelector(".HINT");
+            //set inner HTML test of HINT to "Hello " plus value of PLAYER plus " - select a FIELD" at the end
+            HINT.innerHTML = "Hello " + PLAYER + ", click or tap to play";
+            //quick test
+            alert(HINT.innerHTML);
+
+
+            function MARKINGS(CLICKAGE) {
+            //declare variable FIELD and set to target object of mouse event
+            var FIELD = CLICKAGE.target;
+            //label the FIELD with the PLAYER's name, set aria-label attribute to set background-image)
+            FIELD.setAttribute("aria-label", PLAYER);
+            // disable FIELD against further CLICKAGE (set disabled attribute)
+            FIELD.setAttribute("disabled", "disabled");
+
+            //change PLAYER
+            if (PLAYER === "X") {
+                PLAYER = "O"
+                } else {
+                    PLAYER = "X";
+                }
+            //whose turn is it?
+            HINT.innerHTML = "It's " + PLAYER + "'s turn now."
+            //call function for ties
+            allfieldsareselected();
+            //if all fields were selected using allFieldsAreSelected(), set hint indicating the end of the game
+            if (allfieldsareselected()) HINT.innerHTML = "Game over!";
+            }
+
+
+            //declare and set function for if all fields are selected
+            function allfieldsareselected() {
+                var fields = document.querySelectorAll("#gameboard button");
+                // ‘len’ for length and ‘c’ for counter and ‘c++’ is same as ‘c = c + 1’
+                var len = fields.length;
+                for (var c = 0; c < len; c++) {
+                    // get field object from the list fields
+                    var f = fields[c];
+                    // if there is an empty label, return false (exit function)
+                    if ( f.getAttribute("aria-label") === "" ) {
+                        return false;
+                    } 
+                }
+                return true;
+            }
+        </script>
+    </body>
+</html>
