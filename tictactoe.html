@@ -90,25 +90,26 @@
 
 
             function MARKINGS(CLICKAGE) {
-            //declare variable FIELD and set to target object of mouse event
-            var FIELD = CLICKAGE.target;
-            //label the FIELD with the PLAYER's name, set aria-label attribute to set background-image)
-            FIELD.setAttribute("aria-label", PLAYER);
-            // disable FIELD against further CLICKAGE (set disabled attribute)
-            FIELD.setAttribute("disabled", "disabled");
+                //declare variable FIELD and set to target object of mouse event
+                var FIELD = CLICKAGE.target;
+                //label the FIELD with the PLAYER's name, set aria-label attribute to set background-image)
+                FIELD.setAttribute("aria-label", PLAYER);
+                // disable FIELD against further CLICKAGE (set disabled attribute)
+                FIELD.setAttribute("disabled", "disabled");
 
-            //change PLAYER
-            if (PLAYER === "X") {
-                PLAYER = "O"
-                } else {
-                    PLAYER = "X";
-                }
-            //whose turn is it?
-            HINT.innerHTML = "It's " + PLAYER + "'s turn now."
-            //call function for ties
-            allfieldsareselected();
-            //if all fields were selected using allFieldsAreSelected(), set hint indicating the end of the game
-            if (allfieldsareselected()) HINT.innerHTML = "Game over!";
+                //change PLAYER
+                if (PLAYER === "X") {
+                    PLAYER = "O"
+                    } else {
+                        PLAYER = "X";
+                    }
+
+                //whose turn is it?
+                HINT.innerHTML = "It's " + PLAYER + "'s turn now."
+                //call function for ties
+                allfieldsareselected();
+                //if all fields were selected using allFieldsAreSelected(), set hint indicating the end of the game
+                if (allfieldsareselected()) HINT.innerHTML = "Game over!";
             }
 
 
